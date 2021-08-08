@@ -1,3 +1,9 @@
+class Register:
+    def __init__(self):
+        self.value = "";
+
+
+
 def Addition(r1, r2, r3):
     pass
 # to print the opcode
@@ -42,3 +48,27 @@ def OR(r1, r2, r3):
 
 def AND(r1, r2, r3):
     pass
+
+def Invert(r1, r2):
+    pass
+
+def Compare(r1, r2):
+    pass
+
+def Unconditional_Jump(mem):
+    pass
+
+def Jump_if_Less_Than(mem):
+    pass
+
+def Jump_if_Greater_Than(mem):
+    pass
+
+def Jump_if_Equal(mem):
+    pass
+
+def Halt():
+    pass
+
+# def Flag(v, l, g, e):
+#     pass
