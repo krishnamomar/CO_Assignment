@@ -2,7 +2,10 @@ class Register:
     def __init__(self):
         self.value = "";
 
-
+class variable:
+    def __init__(self, name):
+        self.value = 0;
+        self.name = name;
 
 def Addition(r1, r2, r3):
     pass
