@@ -2,7 +2,7 @@ class Register:
     def __init__(self):
         self.value = "";
 
-class variable:
+class Variable:
     def __init__(self, name):
         self.value = 0;
         self.name = name;
