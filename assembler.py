@@ -9,6 +9,8 @@ class Variable:
 
 def Addition(r1, r2, r3): #Performs reg1 = reg2+ reg3. If the computation overflows, then the overflow flag is set 
     a="00000"
+    # l=[]
+    # l.append()
     b="00"
     c="001"
     d="010"
@@ -49,7 +51,7 @@ def Move_Immediate(r1, x): #Performs reg1 = $Imm where Imm is a 8 bit value.
     # f=a+b+c+d+e
     f=a+b
     return f
-
+# flag(1,0,0,0)
     # pass
 
 def Move_Register(r1, r2):
@@ -62,6 +64,7 @@ def Move_Register(r1, r2):
     f=a+b+c+d
     return f
     # pass
+    # flag(1,0,0,0)
 
 def Load(r1, mem):
     # mem is memory address
@@ -135,3 +138,28 @@ def Halt():
 
 # def Flag(v, l, g, e):
 #     pass
+'''main
+input 
+mul r1 r2 r3
+  if list[0]==Multiply:
+      mul()
+add r1 r2 r3 
+ if list[0]== Addition:
+     add()
+
+l=[0,1,2,3,4,5,6,7,8,9......,19]
+input
+list=[]
+split().
+if list[0] not in l:
+    error()
+
+
+for varible:
+    list of inputs:
+    after last element first Variable
+    variable=8 bit binary 
+
+    x value 10
+    x memory adress 7 (list last index+1)
+    hlt 6 line '''
