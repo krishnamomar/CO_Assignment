@@ -1,4 +1,5 @@
 class Register:
+    # address is a 3 bit string
     def __init__(self, address):
         self.value = 0;
         self.address = address
@@ -117,13 +118,26 @@ def OR(r1, r2, r3):
     pass
 
 def AND(r1, r2, r3):
+    # r1 r2 and r3 are the classes
+    a = r1.addr()
+    b = r2.addr()
+    c = r3.addr()
+    return "01100" + "00" + a + b + c 
     pass
 
 def Invert(r1, r2):
-    pass
+    a = r1.addr()
+    b = r2.addr()
+    return "01101" + "00000" + a + b
 
 def Compare(r1, r2):
-    pass
+    #r1 and r2 are the classes 
+    a = r1.addr()
+    b = r2.addr()
+    # call flag here
+
+    return "01110" + "00000" + a + b
+    
 
 def Unconditional_Jump(mem):
     # mem is a string of size 8 
