@@ -97,25 +97,400 @@ def Store(r1, mem):
     # pass
 
 def Multiply(r1, r2, r3):
-    pass
+    lst=['mul R3 R1 R2']
+
+    for a in range(0,len(lst)):
+        line=lst[a].split(' ')
+        if line[0]=='mul':
+            ele1='00110'+'00'
+            printflag=1
+            for i in range(0,7):
+                if line[1]=='R'+'0' or line[1]=='R'+'1' or line[1]=='R'+'2' or line[1]=='R'+'3' or line[1]=='R'+'4' or line[1]=='R'+'5' or line[1]=='R'+'6':   #checking value of 1st registor
+                    if i==0:
+                        ele2='000'
+                    elif i==1:
+                        ele2='001'
+                    elif i==2:
+                        ele2='010'
+                    elif i==3:
+                        ele2='011'
+                    if i==4:
+                        ele2='100'
+                    if i==5:
+                        ele2='101'
+                    if i==6:
+                        ele2='110'
+                else:
+                    print('Error')
+                    printflag-=1
+                    break
+                    
+                    
+                
+                if line[2]=='R'+'0' or line[2]=='R'+'1' or line[2]=='R'+'2' or line[2]=='R'+'3' or line[2]=='R'+'4' or line[2]=='R'+'5' or line[2]=='R'+'6':    #checking the value of 2nd registor
+                    if i==0:
+                        ele3='000'
+                    if i==1:
+                        ele3='001'
+                    if i==2:
+                        ele3='010'
+                    if i==3:
+                        ele3='011'
+                    if i==4:
+                        ele3='100'
+                    if i==5:
+                        ele3='101'
+                    if i==6:
+                        ele3='110'
+                else:
+                    print('Error')
+                    printflag-=1
+                    break
+                    
+                        
+                if line[3]=='R'+'0' or line[3]=='R'+'1' or line[3]=='R'+'2' or line[3]=='R'+'3' or line[3]=='R'+'4' or line[3]=='R'+'5' or line[3]=='R'+'6':    #checking the value of 3rd registor
+                    if i==0:
+                        ele4='000'
+                    if i==1:
+                        ele4='001'
+                    if i==2:
+                        ele4='010'
+                    if i==3:
+                        ele4='011'
+                    if i==4:
+                        ele4='100'
+                    if i==5:
+                        ele4='101'
+                    if i==6:
+                        ele4='110'
+                else:
+                        print('Error')
+                        printflag-=1
+                        break
+                        
+            #print(printflag)            
+            if printflag==1 :               
+                return(ele1+ele2+ele3+ele4)
+            
+
 
 def Divide(r3, r4):
-    # quotent in r0 
-    # remainder in r1
-    pass
+    lst=['div R2 R3']
+
+    for a in range(0,len(lst)):
+        line=lst[a].split(' ')
+        if line[0]=='div':
+            ele1='00111'+'00000'
+            printflag=1
+            for i in range(0,8):
+                if line[1]=='R'+'0' or line[1]=='R'+'1' or line[1]=='R'+'2' or line[1]=='R'+'3' or line[1]=='R'+'4' or line[1]=='R'+'5' or line[1]=='R'+'6':   #checking value of 1st registor
+                    if i==0:
+                        ele2='000'
+                    if i==1:
+                        ele2='001'
+                    if i==2:
+                        ele2='010'
+                    if i==3:
+                        ele2='011'
+                    if i==4:
+                        ele2='100'
+                    if i==5:
+                        ele2='101'
+                    if i==6:
+                        ele2='110'
+                else:
+                    print('Error')
+                    printflag-=1
+                    break
+                    
+                #
+                if line[2]=='R'+'0' or line[2]=='R'+'1' or line[2]=='R'+'2' or line[2]=='R'+'3' or line[2]=='R'+'4' or line[2]=='R'+'5' or line[2]=='R'+'6':    #checking the value of 2nd registor
+                    if i==0:
+                        ele3='000'
+                    if i==1:
+                        ele3='001'
+                    if i==2:
+                        ele3='010'
+                    if i==3:
+                        ele3='011'
+                    if i==4:
+                        ele3='100'
+                    if i==5:
+                        ele3='101'
+                    if i==6:
+                        ele3='110'
+                    
+                else:
+                    print('Error')
+                    printflag-=1
+                    break
+                        
+            if printflag==1:
+                return(ele1+ele2+ele3)
+
+
 
 def Right_Shift(r1, x):
-    #x is int
-    pass
+   def dtb(num): 
+        num=int(num)
+        bnr = bin(num)
+        bnr=bnr.replace('0b','')
+        x = bnr[::-1] #this reverses an array
+        while len(x) < 8:
+            x += '0'
+        bnr = x[::-1]
+        #print((bnr))
+        return(bnr)
+
+    #print(dtb(5))
+    lst=['rs R2 $25']
+
+    for a in range(0,len(lst)):
+        line=lst[a].split(' ')
+        if line[0]=='rs':
+            ele1='01000'
+            printflag=1
+            for i in range(0,8):
+                if line[1]=='R'+'0' or line[1]=='R'+'1' or line[1]=='R'+'2' or line[1]=='R'+'3' or line[1]=='R'+'4' or line[1]=='R'+'5' or line[1]=='R'+'6':   #checking value of 1st registor
+                    if i==0:
+                        ele2='000'
+                    elif i==1:
+                        ele2='001'
+                    if i==2:
+                        ele2='010'
+                    if i==3:
+                        ele2='011'
+                    if i==4:
+                        ele2='100'
+                    if i==5:
+                        ele2='101'
+                    if i==6:
+                        ele2='110'
+                    
+                else:
+                    
+                    print('Error')
+                    printflag-=1
+                    break
+            if (line[2][1:]).isdigit():
+                ele3=dtb(line[2][1:])    #binary conversion of 25
+            else:
+                print('error')
+                printflag-=1
+                break
+            
+            if printflag==1:
+                return(ele1+ele2+ele3)
+
 
 def Left_Shift(r1, x):
-    pass
+    def dtb(num): 
+        num=int(num)
+        bnr = bin(num)
+        bnr=bnr.replace('0b','')
+        x = bnr[::-1] #this reverses an array
+        while len(x) < 8:
+            x += '0'
+        bnr = x[::-1]
+        #print((bnr))
+        return(bnr)
+
+    #print(dtb(5))
+    lst=['ls R2 $25']
+
+    for a in range(0,len(lst)):
+        line=lst[a].split(' ')
+        if line[0]=='ls':
+            ele1='01001'
+            printflag=1
+            for i in range(0,8):
+                if line[1]=='R'+'0' or line[1]=='R'+'1' or line[1]=='R'+'2' or line[1]=='R'+'3' or line[1]=='R'+'4' or line[1]=='R'+'5' or line[1]=='R'+'6':   #checking value of 1st registor
+                    if i==0:
+                        ele2='000'
+                    elif i==1:
+                        ele2='001'
+                    if i==2:
+                        ele2='010'
+                    if i==3:
+                        ele2='011'
+                    if i==4:
+                        ele2='100'
+                    if i==5:
+                        ele2='101'
+                    if i==6:
+                        ele2='110'
+                    
+                else:
+                    
+                    print('Error')
+                    printflag-=1
+                    break
+            if (line[2][1:]).isdigit():
+                ele3=dtb(line[2][1:])    #binary conversion of 25
+            else:
+                print('error')
+                printflag-=1
+                break
+            
+            if printflag==1:
+                return(ele1+ele2+ele3)
+
 
 def XOR(r1, r2, r3):
-    pass
+    lst=['xor R3 R1 R2']
+
+    for a in range(0,len(lst)):
+        line=lst[a].split(' ')
+        if line[0]=='xor':
+            ele1='01010'+'00'
+            printflag=1
+            for i in range(0,7):
+                if line[1]=='R'+'0' or line[1]=='R'+'1' or line[1]=='R'+'2' or line[1]=='R'+'3' or line[1]=='R'+'4' or line[1]=='R'+'5' or line[1]=='R'+'6':   #checking value of 1st registor
+                    if i==0:
+                        ele2='000'
+                    elif i==1:
+                        ele2='001'
+                    elif i==2:
+                        ele2='010'
+                    elif i==3:
+                        ele2='011'
+                    if i==4:
+                        ele2='100'
+                    if i==5:
+                        ele2='101'
+                    if i==6:
+                        ele2='110'
+                else:
+                    print('Error')
+                    printflag-=1
+                    break
+                    
+                    
+                
+                if line[2]=='R'+'0' or line[2]=='R'+'1' or line[2]=='R'+'2' or line[2]=='R'+'3' or line[2]=='R'+'4' or line[2]=='R'+'5' or line[2]=='R'+'6':    #checking the value of 2nd registor
+                    if i==0:
+                        ele3='000'
+                    if i==1:
+                        ele3='001'
+                    if i==2:
+                        ele3='010'
+                    if i==3:
+                        ele3='011'
+                    if i==4:
+                        ele3='100'
+                    if i==5:
+                        ele3='101'
+                    if i==6:
+                        ele3='110'
+                else:
+                    print('Error')
+                    printflag-=1
+                    break
+                    
+                        
+                if line[3]=='R'+'0' or line[3]=='R'+'1' or line[3]=='R'+'2' or line[3]=='R'+'3' or line[3]=='R'+'4' or line[3]=='R'+'5' or line[3]=='R'+'6':    #checking the value of 3rd registor
+                    if i==0:
+                        ele4='000'
+                    if i==1:
+                        ele4='001'
+                    if i==2:
+                        ele4='010'
+                    if i==3:
+                        ele4='011'
+                    if i==4:
+                        ele4='100'
+                    if i==5:
+                        ele4='101'
+                    if i==6:
+                        ele4='110'
+                else:
+                        print('Error')
+                        printflag-=1
+                        break
+                        
+            #print(printflag)            
+            if printflag==1 :               
+                return(ele1+ele2+ele3+ele4)
+            
+
 
 def OR(r1, r2, r3):
-    pass
+    lst=['or R3 R1 R2']
+
+    for a in range(0,len(lst)):
+        line=lst[a].split(' ')
+        if line[0]=='or':
+            ele1='01011'+'00'
+            printflag=1
+            for i in range(0,7):
+                if line[1]=='R'+'0' or line[1]=='R'+'1' or line[1]=='R'+'2' or line[1]=='R'+'3' or line[1]=='R'+'4' or line[1]=='R'+'5' or line[1]=='R'+'6':   #checking value of 1st registor
+                    if i==0:
+                        ele2='000'
+                    elif i==1:
+                        ele2='001'
+                    elif i==2:
+                        ele2='010'
+                    elif i==3:
+                        ele2='011'
+                    if i==4:
+                        ele2='100'
+                    if i==5:
+                        ele2='101'
+                    if i==6:
+                        ele2='110'
+                else:
+                    print('Error')
+                    printflag-=1
+                    break
+                    
+                    
+                
+                if line[2]=='R'+'0' or line[2]=='R'+'1' or line[2]=='R'+'2' or line[2]=='R'+'3' or line[2]=='R'+'4' or line[2]=='R'+'5' or line[2]=='R'+'6':    #checking the value of 2nd registor
+                    if i==0:
+                        ele3='000'
+                    if i==1:
+                        ele3='001'
+                    if i==2:
+                        ele3='010'
+                    if i==3:
+                        ele3='011'
+                    if i==4:
+                        ele3='100'
+                    if i==5:
+                        ele3='101'
+                    if i==6:
+                        ele3='110'
+                else:
+                    print('Error')
+                    printflag-=1
+                    break
+                    
+                        
+                if line[3]=='R'+'0' or line[3]=='R'+'1' or line[3]=='R'+'2' or line[3]=='R'+'3' or line[3]=='R'+'4' or line[3]=='R'+'5' or line[3]=='R'+'6':    #checking the value of 3rd registor
+                    if i==0:
+                        ele4='000'
+                    if i==1:
+                        ele4='001'
+                    if i==2:
+                        ele4='010'
+                    if i==3:
+                        ele4='011'
+                    if i==4:
+                        ele4='100'
+                    if i==5:
+                        ele4='101'
+                    if i==6:
+                        ele4='110'
+                else:
+                        print('Error')
+                        printflag-=1
+                        break
+                        
+            #print(printflag)            
+            if printflag==1 :               
+                return(ele1+ele2+ele3+ele4)
+        
+
 
 def AND(r1, r2, r3):
     # r1 r2 and r3 are the classes
