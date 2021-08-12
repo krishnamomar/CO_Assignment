@@ -1,6 +1,10 @@
 class Register:
-    def __init__(self):
-        self.value = "";
+    def __init__(self, address):
+        self.value = 0;
+        self.address = address
+
+    def addr(self):
+        return self.address
 
 class Variable:
     def __init__(self, name):
@@ -122,19 +126,30 @@ def Compare(r1, r2):
     pass
 
 def Unconditional_Jump(mem):
-    pass
+    # mem is a string of size 8 
+    # if len(mem)!=8:
+    #     error
+    return "01111" + "000" + mem
+    
 
 def Jump_if_Less_Than(mem):
-    pass
+    # if len(mem)!=8:
+    #     error
+    return "10000" + "000" + mem
 
 def Jump_if_Greater_Than(mem):
-    pass
+    # if len(mem)!=8:
+    #     error
+    return "10001" + "000" + mem
 
 def Jump_if_Equal(mem):
-    pass
+    # if len(mem)!=8:
+    #     error
+    return "10010" + "000" + mem
 
 def Halt():
-    pass
+    return "1001100000000000"
+    
 
 # def Flag(v, l, g, e):
 #     pass
