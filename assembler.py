@@ -200,6 +200,17 @@ for varible:
     x memory adress 7 (list last index+1)
     hlt 6 line '''
 
+global R0;
+global R1;
+global R2;
+global R3;
+global R4;
+global R5;
+global R6;
+global FLAGS;
+global OutputFile;
+global all_registers;
+
 R0 = Register("000")
 R1 = Register("001")
 R2 = Register("010")
@@ -208,4 +219,150 @@ R4 = Register("100")
 R5 = Register("101")
 R6 = Register("110")
 FLAGS = Register("111")
+OutputFile = [];
+all_registers = ["R0", "R1", "R2", "R3", "R4", "R5", "R6"];
+
+instructions = list(input().split("\n"))
+
+for instr in range(len(instructions)):
+    ins = list((instructions[instr]).split(" "))
+
+    if len(ins)==0:
+        continue
+    elif ins[0]=="hlt":
+        if instr==len(instructions)-1:
+            OutputFile.append(Halt());
+            break
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+
+    elif ins[0]=="add":
+        if len(ins)==4:
+           
+            if (ins[1] not in all_registers) or (ins[2] not in all_registers) or (ins[3] not in all_registers):
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #1st register detection
+                if ins[1]=="R0":
+                    r1 = R0
+                elif ins[1]=="R1":
+                    r1 = R1
+                elif ins[1]=="R2":
+                    r1 = R2
+                elif ins[1]=="R3":
+                    r1 = R3
+                elif ins[1]=="R4":
+                    r1 = R4
+                elif ins[1]=="R5":
+                    r1 = R5
+                elif ins[1]=="R6":
+                    r1 = R6
+
+                #2nd register detection
+                if ins[2]=="R0":
+                    r2 = R0
+                elif ins[2]=="R1":
+                    r2 = R1
+                elif ins[2]=="R2":
+                    r2 = R2
+                elif ins[2]=="R3":
+                    r2 = R3
+                elif ins[2]=="R4":
+                    r2 = R4
+                elif ins[2]=="R5":
+                    r2 = R5
+                elif ins[2]=="R6":
+                    r2 = R6
+
+                #3rd register detection
+                if ins[3]=="R0":
+                    r3 = R0
+                elif ins[3]=="R1":
+                    r3 = R1
+                elif ins[3]=="R2":
+                    r3 = R2
+                elif ins[3]=="R3":
+                    r3 = R3
+                elif ins[3]=="R4":
+                    r3 = R4
+                elif ins[3]=="R5":
+                    r3 = R5
+                elif ins[3]=="R6":
+                    r3 = R6
+
+                OutputFile.append(Addition(r1, r2, r3));
+
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+
+    elif ins[0]=="sub":
+        if len(ins)==4:
+           
+            if (ins[1] not in all_registers) or (ins[2] not in all_registers) or (ins[3] not in all_registers):
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #1st register detection
+                if ins[1]=="R0":
+                    r1 = R0
+                elif ins[1]=="R1":
+                    r1 = R1
+                elif ins[1]=="R2":
+                    r1 = R2
+                elif ins[1]=="R3":
+                    r1 = R3
+                elif ins[1]=="R4":
+                    r1 = R4
+                elif ins[1]=="R5":
+                    r1 = R5
+                elif ins[1]=="R6":
+                    r1 = R6
+
+                #2nd register detection
+                if ins[2]=="R0":
+                    r2 = R0
+                elif ins[2]=="R1":
+                    r2 = R1
+                elif ins[2]=="R2":
+                    r2 = R2
+                elif ins[2]=="R3":
+                    r2 = R3
+                elif ins[2]=="R4":
+                    r2 = R4
+                elif ins[2]=="R5":
+                    r2 = R5
+                elif ins[2]=="R6":
+                    r2 = R6
+
+                #3rd register detection
+                if ins[3]=="R0":
+                    r3 = R0
+                elif ins[3]=="R1":
+                    r3 = R1
+                elif ins[3]=="R2":
+                    r3 = R2
+                elif ins[3]=="R3":
+                    r3 = R3
+                elif ins[3]=="R4":
+                    r3 = R4
+                elif ins[3]=="R5":
+                    r3 = R5
+                elif ins[3]=="R6":
+                    r3 = R6
+
+                OutputFile.append(Subtraction(r1, r2, r3));
+
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+
+                
+
+
+
 
