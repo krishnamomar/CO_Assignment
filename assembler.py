@@ -242,7 +242,11 @@ for instr in range(len(instructions)):
 
     if len(ins)==0:
         continue
-    elif ins[0]=="hlt":
+
+    if ins[0][-1]==":":
+        ins = ins[1:]
+    
+    if ins[0]=="hlt":
         if instr==len(instructions)-1:
             OutputFile.append(Halt());
             break
@@ -986,21 +990,52 @@ for instr in range(len(instructions)):
         else:
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
+
+    elif ins[0]=="jmp":
+        jj = ins[1]
+
+        if jj not in variable_dict.keys:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+        else:
+            x = variable_dict[jj]
+            OutputFile.append(Unconditional_Jump(x))
     
+    elif ins[0]=="jlt":
+        jj = ins[1]
+
+        if jj not in variable_dict.keys:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+        else:
+            x = variable_dict[jj]
+            OutputFile.append(Jump_if_Less_Than(x))
+
+    elif ins[0]=="jgt":
+        jj = ins[1]
+
+        if jj not in variable_dict.keys:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+        else:
+            x = variable_dict[jj]
+            OutputFile.append(Jump_if_Greater_Than(x))
+
+    elif ins[0]=="je":
+        jj = ins[1]
+
+        if jj not in variable_dict.keys:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+        else:
+            x = variable_dict[jj]
+            OutputFile.append(Jump_if_Equal(x))
+
+    else:
+        OutputFile = ["Error in line number: " + str(instr+1)]
+        break
+
+
         
     
-
-    
-    
-
-    
-                
-                
-
-
-
-                
-
-
-
-
+        
