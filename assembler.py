@@ -229,6 +229,7 @@ global FLAGS;
 global OutputFile;
 global all_registers;
 global variable_dict;
+global all_resistors_1;
 
 R0 = Register("000")
 R1 = Register("001")
@@ -240,6 +241,7 @@ R6 = Register("110")
 FLAGS = Register("111")
 OutputFile = [];
 all_registers = ["R0", "R1", "R2", "R3", "R4", "R5", "R6"];
+all_registers_1 = ["R0", "R1", "R2", "R3", "R4", "R5", "R6","FLAGS"];
 variable_dict = {}
 instructions = sys.stdin.readlines()
 
@@ -435,7 +437,7 @@ for instr in range(len(instructions)):
                     continue
                     
             
-            elif (ins[2] not in all_registers) or ins[2]!="FLAGS":
+            elif (ins[2] not in all_registers_1) :
                 OutputFile = ["Error in line number: " + str(instr+1)]
                 break
 
