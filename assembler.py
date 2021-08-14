@@ -58,17 +58,25 @@ def Move_Register(r1, r2):
 
     return "00011" + "00000" + a + b
 
-def Load(r1, mem):
+def Load(r1, x):
+    # x is integer
     a = r1.addr()
-    # mem is 8 bit string
+    bnr = bin(x)
+    bnr = bnr.replace('0b','')
+    while len(bnr)<8:
+        bnr = "0" + bnr
+    
+    return "00100" + a + bnr
 
-    return "00100" + a + mem
-
-def Store(r1, mem):
+def Store(r1, x):
+    # x is integer
     a = r1.addr()
-    # mem is 8 bit string
+    bnr = bin(x)
+    bnr = bnr.replace('0b','')
+    while len(bnr)<8:
+        bnr = "0" + bnr
 
-    return "00101" + a + mem
+    return "00101" + a + bnr
 
 def Multiply(r1, r2, r3):
     # r1 r2 and r3 are the classes
@@ -434,7 +442,198 @@ for instr in range(len(instructions)):
                     r2 = FLAGS
 
             OutputFile.append(Move_Register(r1, r2))
+
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+
+    elif ins[0]=="ld":
+        if len(ins)==3:
+           
+            if (ins[1] not in all_registers):
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #1st register detection
+                if ins[1]=="R0":
+                    r1 = R0
+                elif ins[1]=="R1":
+                    r1 = R1
+                elif ins[1]=="R2":
+                    r1 = R2
+                elif ins[1]=="R3":
+                    r1 = R3
+                elif ins[1]=="R4":
+                    r1 = R4
+                elif ins[1]=="R5":
+                    r1 = R5
+                elif ins[1]=="R6":
+                    r1 = R6
+
+            jj = ins[2]
+
+            if jj not in variable_dict.keys:
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+            else:
+                x = variable_dict[jj]
+                OutputFile.append(Load(r1, x))
+
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
     
+    elif ins[0]=="st":
+        if len(ins)==3:
+           
+            if (ins[1] not in all_registers):
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #1st register detection
+                if ins[1]=="R0":
+                    r1 = R0
+                elif ins[1]=="R1":
+                    r1 = R1
+                elif ins[1]=="R2":
+                    r1 = R2
+                elif ins[1]=="R3":
+                    r1 = R3
+                elif ins[1]=="R4":
+                    r1 = R4
+                elif ins[1]=="R5":
+                    r1 = R5
+                elif ins[1]=="R6":
+                    r1 = R6
+
+            jj = ins[2]
+
+            if jj not in variable_dict.keys:
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+            else:
+                x = variable_dict[jj]
+                OutputFile.append(Store(r1, x))
+
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+    
+    elif ins[0]=="mul":
+        if len(ins)==4:
+           
+            if (ins[1] not in all_registers) or (ins[2] not in all_registers) or (ins[3] not in all_registers):
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #1st register detection
+                if ins[1]=="R0":
+                    r1 = R0
+                elif ins[1]=="R1":
+                    r1 = R1
+                elif ins[1]=="R2":
+                    r1 = R2
+                elif ins[1]=="R3":
+                    r1 = R3
+                elif ins[1]=="R4":
+                    r1 = R4
+                elif ins[1]=="R5":
+                    r1 = R5
+                elif ins[1]=="R6":
+                    r1 = R6
+
+                #2nd register detection
+                if ins[2]=="R0":
+                    r2 = R0
+                elif ins[2]=="R1":
+                    r2 = R1
+                elif ins[2]=="R2":
+                    r2 = R2
+                elif ins[2]=="R3":
+                    r2 = R3
+                elif ins[2]=="R4":
+                    r2 = R4
+                elif ins[2]=="R5":
+                    r2 = R5
+                elif ins[2]=="R6":
+                    r2 = R6
+
+                #3rd register detection
+                if ins[3]=="R0":
+                    r3 = R0
+                elif ins[3]=="R1":
+                    r3 = R1
+                elif ins[3]=="R2":
+                    r3 = R2
+                elif ins[3]=="R3":
+                    r3 = R3
+                elif ins[3]=="R4":
+                    r3 = R4
+                elif ins[3]=="R5":
+                    r3 = R5
+                elif ins[3]=="R6":
+                    r3 = R6
+
+                OutputFile.append(Multiply(r1, r2, r3));
+
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+    
+    elif ins[0]=="div":
+        if len(ins)==3:
+           
+            if (ins[1] not in all_registers) or (ins[2] not in all_registers):
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #1st register detection
+                if ins[1]=="R0":
+                    r1 = R0
+                elif ins[1]=="R1":
+                    r1 = R1
+                elif ins[1]=="R2":
+                    r1 = R2
+                elif ins[1]=="R3":
+                    r1 = R3
+                elif ins[1]=="R4":
+                    r1 = R4
+                elif ins[1]=="R5":
+                    r1 = R5
+                elif ins[1]=="R6":
+                    r1 = R6
+
+                #2nd register detection
+                if ins[2]=="R0":
+                    r2 = R0
+                elif ins[2]=="R1":
+                    r2 = R1
+                elif ins[2]=="R2":
+                    r2 = R2
+                elif ins[2]=="R3":
+                    r2 = R3
+                elif ins[2]=="R4":
+                    r2 = R4
+                elif ins[2]=="R5":
+                    r2 = R5
+                elif ins[2]=="R6":
+                    r2 = R6
+
+            OutputFile.append(Divide(r1, r2))
+
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+
+    
+    
+
+    
+                
                 
 
 
