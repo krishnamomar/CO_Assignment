@@ -199,3 +199,13 @@ for varible:
     x value 10
     x memory adress 7 (list last index+1)
     hlt 6 line '''
+
+R0 = Register("000")
+R1 = Register("001")
+R2 = Register("010")
+R3 = Register("011")
+R4 = Register("100")
+R5 = Register("101")
+R6 = Register("110")
+FLAGS = Register("111")
+
