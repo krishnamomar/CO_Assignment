@@ -23,8 +23,6 @@ def Addition(r1, r2, r3): #Performs reg1 = reg2+ reg3. If the computation overfl
     b = r2.addr()
     c = r3.addr()
     return "00000" + "00" + a + b + c
-
-
     # if overflow-----flag(1,0,0,0)
     # pass
     #if not overflows----flag(0,0,0,0)
@@ -47,6 +45,7 @@ def Move_Immediate(r1, x): #Performs reg1 = $Imm where Imm is a 8 bit value.
         bnr = "0" + bnr
 
     a = r1.addr()
+    # flag(0,0,0,0)
 
     return "00010" + a + bnr
 
@@ -54,7 +53,7 @@ def Move_Register(r1, r2):
     #r1 and r2 are the classes 
     a = r1.addr()
     b = r2.addr()
-    # call flag here
+    # flag(0,0,0,0)  # call flag here
 
     return "00011" + "00000" + a + b
 
@@ -65,7 +64,7 @@ def Load(r1, x):
     bnr = bnr.replace('0b','')
     while len(bnr)<8:
         bnr = "0" + bnr
-    
+    # flag(0,0,0,0)
     return "00100" + a + bnr
 
 def Store(r1, x):
@@ -75,7 +74,7 @@ def Store(r1, x):
     bnr = bnr.replace('0b','')
     while len(bnr)<8:
         bnr = "0" + bnr
-
+    # flag(0,0,0,0)
     return "00101" + a + bnr
 
 def Multiply(r1, r2, r3):
@@ -90,8 +89,9 @@ def Multiply(r1, r2, r3):
 def Divide(r3, r4):
     a = r3.addr()
     b = r4.addr()
+    # flag(0,0,0,0)
     return "00111" + "00000" + a + b
-
+    
 
 
 def Right_Shift(r1, x):
@@ -102,7 +102,7 @@ def Right_Shift(r1, x):
         bnr = "0" + bnr
 
     a = r1.addr()
-
+    # flag(0,0,0,0)
     return "01000" + a + bnr
    
 
@@ -115,7 +115,7 @@ def Left_Shift(r1, x):
         bnr = "0" + bnr
 
     a = r1.addr()
-
+    # flag(0,0,0,0)
     return "01001" + a + bnr
 
 
@@ -124,6 +124,7 @@ def XOR(r1, r2, r3):
     a = r1.addr()
     b = r2.addr()
     c = r3.addr()
+    # flag(0,0,0,0)
     return "01010" + "00" + a + b + c
             
 def OR(r1, r2, r3):
@@ -131,6 +132,7 @@ def OR(r1, r2, r3):
     a = r1.addr()
     b = r2.addr()
     c = r3.addr()
+    # flag(0,0,0,0)
     return "01011" + "00" + a + b + c
         
 
@@ -139,12 +141,14 @@ def AND(r1, r2, r3):
     a = r1.addr()
     b = r2.addr()
     c = r3.addr()
+    # flag(0,0,0,0)
     return "01100" + "00" + a + b + c 
     
 
 def Invert(r1, r2):
     a = r1.addr()
     b = r2.addr()
+    # flag(0,0,0,0)
     return "01101" + "00000" + a + b
 
 def Compare(r1, r2):
@@ -152,7 +156,6 @@ def Compare(r1, r2):
     a = r1.addr()
     b = r2.addr()
     # call flag here
-
     return "01110" + "00000" + a + b
     
 
@@ -160,25 +163,30 @@ def Unconditional_Jump(mem):
     # mem is a string of size 8 
     # if len(mem)!=8:
     #     error
+    # flag(0,0,0,0)
     return "01111" + "000" + mem
     
 
 def Jump_if_Less_Than(mem):
     # if len(mem)!=8:
     #     error
+    # flag(0,0,0,0)
     return "10000" + "000" + mem
 
 def Jump_if_Greater_Than(mem):
     # if len(mem)!=8:
     #     error
+    # flag(0,0,0,0)
     return "10001" + "000" + mem
 
 def Jump_if_Equal(mem):
     # if len(mem)!=8:
     #     error
+    # flag(0,0,0,0)
     return "10010" + "000" + mem
 
 def Halt():
+    # flag(0,0,0,0)
     return "1001100000000000"
     
 
@@ -234,6 +242,11 @@ OutputFile = [];
 all_registers = ["R0", "R1", "R2", "R3", "R4", "R5", "R6"];
 variable_dict = {}
 instructions = sys.stdin.readlines()
+
+# def flag(v,l,g,e):
+#     a="000000000000"
+#     b=str(v)+str(l)+str(e)+str(e)
+#     return a+b
 
 for instr in range(len(instructions)):
     if "/n" in instructions[instr]:
@@ -1034,8 +1047,6 @@ for instr in range(len(instructions)):
     else:
         OutputFile = ["Error in line number: " + str(instr+1)]
         break
-
-
-        
+print(OutputFile)      
     
         
