@@ -629,6 +629,367 @@ for instr in range(len(instructions)):
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
 
+    elif ins[0]=="rs":
+        if len(ins)==3:
+           
+            if (ins[1] not in all_registers):
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #1st register detection
+                if ins[1]=="R0":
+                    r1 = R0
+                elif ins[1]=="R1":
+                    r1 = R1
+                elif ins[1]=="R2":
+                    r1 = R2
+                elif ins[1]=="R3":
+                    r1 = R3
+                elif ins[1]=="R4":
+                    r1 = R4
+                elif ins[1]=="R5":
+                    r1 = R5
+                elif ins[1]=="R6":
+                    r1 = R6
+
+            if (ins[2])[0]=="$":  #this is detection of imm
+                x = int(ins[2][1:])
+                if x<0 or x>255:
+                    OutputFile = ["Error in line number: " + str(instr+1)]
+                    break
+                else:
+                    OutputFile.append(Right_Shift(r1, x))
+                    continue
+            else:
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+    
+    elif ins[0]=="ls":
+        if len(ins)==3:
+           
+            if (ins[1] not in all_registers):
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #1st register detection
+                if ins[1]=="R0":
+                    r1 = R0
+                elif ins[1]=="R1":
+                    r1 = R1
+                elif ins[1]=="R2":
+                    r1 = R2
+                elif ins[1]=="R3":
+                    r1 = R3
+                elif ins[1]=="R4":
+                    r1 = R4
+                elif ins[1]=="R5":
+                    r1 = R5
+                elif ins[1]=="R6":
+                    r1 = R6
+
+            if (ins[2])[0]=="$":  #this is detection of imm
+                x = int(ins[2][1:])
+                if x<0 or x>255:
+                    OutputFile = ["Error in line number: " + str(instr+1)]
+                    break
+                else:
+                    OutputFile.append(Left_Shift(r1, x))
+                    continue
+            else:
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+    
+    elif ins[0]=="xor":
+        if len(ins)==4:
+           
+            if (ins[1] not in all_registers) or (ins[2] not in all_registers) or (ins[3] not in all_registers):
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #1st register detection
+                if ins[1]=="R0":
+                    r1 = R0
+                elif ins[1]=="R1":
+                    r1 = R1
+                elif ins[1]=="R2":
+                    r1 = R2
+                elif ins[1]=="R3":
+                    r1 = R3
+                elif ins[1]=="R4":
+                    r1 = R4
+                elif ins[1]=="R5":
+                    r1 = R5
+                elif ins[1]=="R6":
+                    r1 = R6
+
+                #2nd register detection
+                if ins[2]=="R0":
+                    r2 = R0
+                elif ins[2]=="R1":
+                    r2 = R1
+                elif ins[2]=="R2":
+                    r2 = R2
+                elif ins[2]=="R3":
+                    r2 = R3
+                elif ins[2]=="R4":
+                    r2 = R4
+                elif ins[2]=="R5":
+                    r2 = R5
+                elif ins[2]=="R6":
+                    r2 = R6
+
+                #3rd register detection
+                if ins[3]=="R0":
+                    r3 = R0
+                elif ins[3]=="R1":
+                    r3 = R1
+                elif ins[3]=="R2":
+                    r3 = R2
+                elif ins[3]=="R3":
+                    r3 = R3
+                elif ins[3]=="R4":
+                    r3 = R4
+                elif ins[3]=="R5":
+                    r3 = R5
+                elif ins[3]=="R6":
+                    r3 = R6
+
+                OutputFile.append(XOR(r1, r2, r3));
+
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+
+    elif ins[0]=="or":
+        if len(ins)==4:
+           
+            if (ins[1] not in all_registers) or (ins[2] not in all_registers) or (ins[3] not in all_registers):
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #1st register detection
+                if ins[1]=="R0":
+                    r1 = R0
+                elif ins[1]=="R1":
+                    r1 = R1
+                elif ins[1]=="R2":
+                    r1 = R2
+                elif ins[1]=="R3":
+                    r1 = R3
+                elif ins[1]=="R4":
+                    r1 = R4
+                elif ins[1]=="R5":
+                    r1 = R5
+                elif ins[1]=="R6":
+                    r1 = R6
+
+                #2nd register detection
+                if ins[2]=="R0":
+                    r2 = R0
+                elif ins[2]=="R1":
+                    r2 = R1
+                elif ins[2]=="R2":
+                    r2 = R2
+                elif ins[2]=="R3":
+                    r2 = R3
+                elif ins[2]=="R4":
+                    r2 = R4
+                elif ins[2]=="R5":
+                    r2 = R5
+                elif ins[2]=="R6":
+                    r2 = R6
+
+                #3rd register detection
+                if ins[3]=="R0":
+                    r3 = R0
+                elif ins[3]=="R1":
+                    r3 = R1
+                elif ins[3]=="R2":
+                    r3 = R2
+                elif ins[3]=="R3":
+                    r3 = R3
+                elif ins[3]=="R4":
+                    r3 = R4
+                elif ins[3]=="R5":
+                    r3 = R5
+                elif ins[3]=="R6":
+                    r3 = R6
+
+                OutputFile.append(OR(r1, r2, r3));
+
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+
+    elif ins[0]=="and":
+        if len(ins)==4:
+           
+            if (ins[1] not in all_registers) or (ins[2] not in all_registers) or (ins[3] not in all_registers):
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #1st register detection
+                if ins[1]=="R0":
+                    r1 = R0
+                elif ins[1]=="R1":
+                    r1 = R1
+                elif ins[1]=="R2":
+                    r1 = R2
+                elif ins[1]=="R3":
+                    r1 = R3
+                elif ins[1]=="R4":
+                    r1 = R4
+                elif ins[1]=="R5":
+                    r1 = R5
+                elif ins[1]=="R6":
+                    r1 = R6
+
+                #2nd register detection
+                if ins[2]=="R0":
+                    r2 = R0
+                elif ins[2]=="R1":
+                    r2 = R1
+                elif ins[2]=="R2":
+                    r2 = R2
+                elif ins[2]=="R3":
+                    r2 = R3
+                elif ins[2]=="R4":
+                    r2 = R4
+                elif ins[2]=="R5":
+                    r2 = R5
+                elif ins[2]=="R6":
+                    r2 = R6
+
+                #3rd register detection
+                if ins[3]=="R0":
+                    r3 = R0
+                elif ins[3]=="R1":
+                    r3 = R1
+                elif ins[3]=="R2":
+                    r3 = R2
+                elif ins[3]=="R3":
+                    r3 = R3
+                elif ins[3]=="R4":
+                    r3 = R4
+                elif ins[3]=="R5":
+                    r3 = R5
+                elif ins[3]=="R6":
+                    r3 = R6
+
+                OutputFile.append(AND(r1, r2, r3));
+
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+
+    elif ins[0]=="not":
+        if len(ins)==3:
+           
+            if (ins[1] not in all_registers) or (ins[2] not in all_registers):
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #1st register detection
+                if ins[1]=="R0":
+                    r1 = R0
+                elif ins[1]=="R1":
+                    r1 = R1
+                elif ins[1]=="R2":
+                    r1 = R2
+                elif ins[1]=="R3":
+                    r1 = R3
+                elif ins[1]=="R4":
+                    r1 = R4
+                elif ins[1]=="R5":
+                    r1 = R5
+                elif ins[1]=="R6":
+                    r1 = R6
+
+                #2nd register detection
+                if ins[2]=="R0":
+                    r2 = R0
+                elif ins[2]=="R1":
+                    r2 = R1
+                elif ins[2]=="R2":
+                    r2 = R2
+                elif ins[2]=="R3":
+                    r2 = R3
+                elif ins[2]=="R4":
+                    r2 = R4
+                elif ins[2]=="R5":
+                    r2 = R5
+                elif ins[2]=="R6":
+                    r2 = R6
+
+            OutputFile.append(Invert(r1, r2))
+
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+
+    elif ins[0]=="cmp":
+        if len(ins)==3:
+           
+            if (ins[1] not in all_registers) or (ins[2] not in all_registers):
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #1st register detection
+                if ins[1]=="R0":
+                    r1 = R0
+                elif ins[1]=="R1":
+                    r1 = R1
+                elif ins[1]=="R2":
+                    r1 = R2
+                elif ins[1]=="R3":
+                    r1 = R3
+                elif ins[1]=="R4":
+                    r1 = R4
+                elif ins[1]=="R5":
+                    r1 = R5
+                elif ins[1]=="R6":
+                    r1 = R6
+
+                #2nd register detection
+                if ins[2]=="R0":
+                    r2 = R0
+                elif ins[2]=="R1":
+                    r2 = R1
+                elif ins[2]=="R2":
+                    r2 = R2
+                elif ins[2]=="R3":
+                    r2 = R3
+                elif ins[2]=="R4":
+                    r2 = R4
+                elif ins[2]=="R5":
+                    r2 = R5
+                elif ins[2]=="R6":
+                    r2 = R6
+
+            OutputFile.append(Compare(r1, r2))
+
+        else:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+    
+        
+    
+
     
     
 
