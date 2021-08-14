@@ -1,3 +1,5 @@
+import sys
+
 class Register:
     # address is a 3 bit string
     def __init__(self, address):
@@ -10,10 +12,10 @@ class Register:
     def val(self):
         return self.value
 
-class Variable:
-    def __init__(self, name):
-        self.value = 0;
-        self.name = name;
+# class Variable:
+#     def __init__(self, name):
+#         self.value = 0;
+#         self.name = name;
 
 def Addition(r1, r2, r3): #Performs reg1 = reg2+ reg3. If the computation overflows, then the overflow flag is set 
     # r1 r2 and r3 are the classes
@@ -210,6 +212,7 @@ global R6;
 global FLAGS;
 global OutputFile;
 global all_registers;
+global variable_dict;
 
 R0 = Register("000")
 R1 = Register("001")
@@ -221,11 +224,13 @@ R6 = Register("110")
 FLAGS = Register("111")
 OutputFile = [];
 all_registers = ["R0", "R1", "R2", "R3", "R4", "R5", "R6"];
-
-instructions = list(input().split("\n"))
+variable_dict = {}
+instructions = sys.stdin.readlines()
 
 for instr in range(len(instructions)):
-    ins = list((instructions[instr]).split(" "))
+    if "/n" in instructions[instr]:
+        instructions[instr].replace("")
+    ins = list((instructions[instr]).split())  #use default split
 
     if len(ins)==0:
         continue
@@ -236,6 +241,16 @@ for instr in range(len(instructions)):
         else:
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
+    
+    elif ins[0]=="var":
+        if len(ins)!=2:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+        else:
+            d = ins[1]
+            #if d in
+            variable_dict[d] = len(instructions) +1 + len(variable_dict)
+
 
     elif ins[0]=="add":
         if len(ins)==4:
@@ -360,6 +375,69 @@ for instr in range(len(instructions)):
         else:
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
+
+    elif ins[0]=="mov":
+        if len(ins)==3:
+           
+            if (ins[1] not in all_registers):
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #1st register detection
+                if ins[1]=="R0":
+                    r1 = R0
+                elif ins[1]=="R1":
+                    r1 = R1
+                elif ins[1]=="R2":
+                    r1 = R2
+                elif ins[1]=="R3":
+                    r1 = R3
+                elif ins[1]=="R4":
+                    r1 = R4
+                elif ins[1]=="R5":
+                    r1 = R5
+                elif ins[1]=="R6":
+                    r1 = R6
+
+            if (ins[2])[0]=="$":  #this is detection of imm
+                x = int(ins[2][1:])
+                if x<0 or x>255:
+                    OutputFile = ["Error in line number: " + str(instr+1)]
+                    break
+                else:
+                    OutputFile.append(Move_Immediate(r1, x))
+                    continue
+                    
+            
+            elif (ins[2] not in all_registers) or ins[2]!="FLAGS":
+                OutputFile = ["Error in line number: " + str(instr+1)]
+                break
+
+            else:
+                #2nd register detection
+                if ins[2]=="R0":
+                    r2 = R0
+                elif ins[2]=="R1":
+                    r2 = R1
+                elif ins[2]=="R2":
+                    r2 = R2
+                elif ins[2]=="R3":
+                    r2 = R3
+                elif ins[2]=="R4":
+                    r2 = R4
+                elif ins[2]=="R5":
+                    r2 = R5
+                elif ins[2]=="R6":
+                    r2 = R6
+                else:
+                    r2 = FLAGS
+
+            OutputFile.append(Move_Register(r1, r2))
+    
+                
+
+
 
                 
 
