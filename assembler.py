@@ -7,21 +7,20 @@ class Register:
     def addr(self):
         return self.address
 
+    def val(self):
+        return self.value
+
 class Variable:
     def __init__(self, name):
         self.value = 0;
         self.name = name;
 
 def Addition(r1, r2, r3): #Performs reg1 = reg2+ reg3. If the computation overflows, then the overflow flag is set 
-    a="00000"
-    # l=[]
-    # l.append()
-    b="00"
-    c="001"
-    d="010"
-    e="011"
-    f=a+b+c+d+e
-    return f
+    # r1 r2 and r3 are the classes
+    a = r1.addr()
+    b = r2.addr()
+    c = r3.addr()
+    return "00000" + "00" + a + b + c
 
 
     # if overflow-----flag(1,0,0,0)
@@ -30,203 +29,58 @@ def Addition(r1, r2, r3): #Performs reg1 = reg2+ reg3. If the computation overfl
 # to print the opcode
 
 def Subtraction(r1, r2, r3):  #Performs reg1 = reg2- reg3. In case reg3> reg2, 0 is written to reg1 and overflow flag is set. 
-    # if r3>r2:
-        # r1=0
-        #overflow----flag(1,0,0,0)
-    # r1=r2-r3
-    a="00001"
-    b="00"
-    c="001"
-    d="010"
-    e="011"
-    f=a+b+c+d+e
-    return f
+    # r1 r2 and r3 are the classes
+    a = r1.addr()
+    b = r2.addr()
+    c = r3.addr()
+    return "00001" + "00" + a + b + c
     
     # pass
 
 def Move_Immediate(r1, x): #Performs reg1 = $Imm where Imm is a 8 bit value.
-    # r1=x
-    #x is int
-    a="00010"
-    # b="00"
-    b="001"
-    # d="010"
-    # e="011"
-    c=x
-    # f=a+b+c+d+e
-    f=a+b
-    return f
-# flag(1,0,0,0)
-    # pass
+    # x is int
+    bnr = bin(x)
+    bnr = bnr.replace('0b','')
+    while len(bnr)<8:
+        bnr = "0" + bnr
+
+    a = r1.addr()
+
+    return "00010" + a + bnr
 
 def Move_Register(r1, r2):
-    # r1=r2
-    a="00011"
-    b="00000"
-    c="001"
-    d="010"
-    # e="011"
-    f=a+b+c+d
-    return f
-    # pass
-    # flag(1,0,0,0)
+    #r1 and r2 are the classes 
+    a = r1.addr()
+    b = r2.addr()
+    # call flag here
+
+    return "00011" + "00000" + a + b
 
 def Load(r1, mem):
-    # mem is memory address
-    #load value at address mem to r1
-    a="00100"
-    # b="00"
-    b="001"
-    # d="010"
-    # e="011"
-    c=mem
-    f=a+b+c
-    return f
-    # pass
+    a = r1.addr()
+    # mem is 8 bit string
+
+    return "00100" + a + mem
 
 def Store(r1, mem):
-    #Stores data from reg1 to mem_addr.
-    a="00101"
-    # b="00"
-    b="001"
-    # d="010"
-    # e="011"
-    c=mem
-    f=a+b+c
-    return f
-    # pass
+    a = r1.addr()
+    # mem is 8 bit string
+
+    return "00101" + a + mem
 
 def Multiply(r1, r2, r3):
-    lst=['mul R3 R1 R2']
-
-    for a in range(0,len(lst)):
-        line=lst[a].split(' ')
-        if line[0]=='mul':
-            ele1='00110'+'00'
-            printflag=1
-            for i in range(0,7):
-                if line[1]=='R'+'0' or line[1]=='R'+'1' or line[1]=='R'+'2' or line[1]=='R'+'3' or line[1]=='R'+'4' or line[1]=='R'+'5' or line[1]=='R'+'6':   #checking value of 1st registor
-                    if i==0:
-                        ele2='000'
-                    elif i==1:
-                        ele2='001'
-                    elif i==2:
-                        ele2='010'
-                    elif i==3:
-                        ele2='011'
-                    if i==4:
-                        ele2='100'
-                    if i==5:
-                        ele2='101'
-                    if i==6:
-                        ele2='110'
-                else:
-                    print('Error')
-                    printflag-=1
-                    break
-                    
-                    
-                
-                if line[2]=='R'+'0' or line[2]=='R'+'1' or line[2]=='R'+'2' or line[2]=='R'+'3' or line[2]=='R'+'4' or line[2]=='R'+'5' or line[2]=='R'+'6':    #checking the value of 2nd registor
-                    if i==0:
-                        ele3='000'
-                    if i==1:
-                        ele3='001'
-                    if i==2:
-                        ele3='010'
-                    if i==3:
-                        ele3='011'
-                    if i==4:
-                        ele3='100'
-                    if i==5:
-                        ele3='101'
-                    if i==6:
-                        ele3='110'
-                else:
-                    print('Error')
-                    printflag-=1
-                    break
-                    
-                        
-                if line[3]=='R'+'0' or line[3]=='R'+'1' or line[3]=='R'+'2' or line[3]=='R'+'3' or line[3]=='R'+'4' or line[3]=='R'+'5' or line[3]=='R'+'6':    #checking the value of 3rd registor
-                    if i==0:
-                        ele4='000'
-                    if i==1:
-                        ele4='001'
-                    if i==2:
-                        ele4='010'
-                    if i==3:
-                        ele4='011'
-                    if i==4:
-                        ele4='100'
-                    if i==5:
-                        ele4='101'
-                    if i==6:
-                        ele4='110'
-                else:
-                        print('Error')
-                        printflag-=1
-                        break
-                        
-            #print(printflag)            
-            if printflag==1 :               
-                return(ele1+ele2+ele3+ele4)
+    # r1 r2 and r3 are the classes
+    a = r1.addr()
+    b = r2.addr()
+    c = r3.addr()
+    return "00110" + "00" + a + b + c
             
 
 
 def Divide(r3, r4):
-    lst=['div R2 R3']
-
-    for a in range(0,len(lst)):
-        line=lst[a].split(' ')
-        if line[0]=='div':
-            ele1='00111'+'00000'
-            printflag=1
-            for i in range(0,8):
-                if line[1]=='R'+'0' or line[1]=='R'+'1' or line[1]=='R'+'2' or line[1]=='R'+'3' or line[1]=='R'+'4' or line[1]=='R'+'5' or line[1]=='R'+'6':   #checking value of 1st registor
-                    if i==0:
-                        ele2='000'
-                    if i==1:
-                        ele2='001'
-                    if i==2:
-                        ele2='010'
-                    if i==3:
-                        ele2='011'
-                    if i==4:
-                        ele2='100'
-                    if i==5:
-                        ele2='101'
-                    if i==6:
-                        ele2='110'
-                else:
-                    print('Error')
-                    printflag-=1
-                    break
-                    
-                #
-                if line[2]=='R'+'0' or line[2]=='R'+'1' or line[2]=='R'+'2' or line[2]=='R'+'3' or line[2]=='R'+'4' or line[2]=='R'+'5' or line[2]=='R'+'6':    #checking the value of 2nd registor
-                    if i==0:
-                        ele3='000'
-                    if i==1:
-                        ele3='001'
-                    if i==2:
-                        ele3='010'
-                    if i==3:
-                        ele3='011'
-                    if i==4:
-                        ele3='100'
-                    if i==5:
-                        ele3='101'
-                    if i==6:
-                        ele3='110'
-                    
-                else:
-                    print('Error')
-                    printflag-=1
-                    break
-                        
-            if printflag==1:
-                return(ele1+ele2+ele3)
+    a = r3.addr()
+    b = r4.addr()
+    return "00111" + "00000" + a + b
 
 
 
@@ -281,6 +135,8 @@ def Right_Shift(r1, x):
             
             if printflag==1:
                 return(ele1+ele2+ele3)
+    
+    
 
 
 def Left_Shift(r1, x):
@@ -340,7 +196,7 @@ def XOR(r1, r2, r3):
     lst=['xor R3 R1 R2']
 
     for a in range(0,len(lst)):
-        line=lst[a].split(' ')
+        line=list(lst[a].split(' '))
         if line[0]=='xor':
             ele1='01010'+'00'
             printflag=1
@@ -498,7 +354,7 @@ def AND(r1, r2, r3):
     b = r2.addr()
     c = r3.addr()
     return "01100" + "00" + a + b + c 
-    pass
+    
 
 def Invert(r1, r2):
     a = r1.addr()
