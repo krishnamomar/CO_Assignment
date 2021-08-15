@@ -270,11 +270,9 @@ for instr in range(len(instructions)):
         break
 #print(instructions)
 for instr in range(len(instructions)):
-    #print(instructions)
-    # if "\n" in instructions[instr]:
-        
-    #     instructions[instr].replace("\n", "")
-    #     print(instructions) 
+    if "/n" in instructions[instr]:
+        instructions[instr].replace("/n", "")
+    
     ins = list((instructions[instr]).split())
     if len(ins)==0:
         continue
