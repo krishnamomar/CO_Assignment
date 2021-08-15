@@ -326,6 +326,10 @@ for instr in range(len(instructions)):
         elif len(variable_dict)==variable_counter:
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
+
+        elif ins[1] in label_dict.keys():
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
         
         else:
             d = ins[1]
