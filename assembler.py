@@ -282,7 +282,7 @@ for instr in range(len(instructions)):
             OutputFile.append(Halt());
             break
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+2)]
             break
     
     elif ins[0]=="var":
