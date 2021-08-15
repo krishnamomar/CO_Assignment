@@ -1061,41 +1061,41 @@ for instr in range(len(instructions)):
     elif ins[0]=="jmp":
         jj = ins[1]
 
-        if jj not in variable_dict.keys():
+        if jj not in label_dict.keys():
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
         else:
-            x = variable_dict[jj]
+            x = label_dict[jj]
             OutputFile.append(Unconditional_Jump(x))
     
     elif ins[0]=="jlt":
         jj = ins[1]
 
-        if jj not in variable_dict.keys():
+        if jj not in label_dict.keys():
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
         else:
-            x = variable_dict[jj]
+            x = label_dict[jj]
             OutputFile.append(Jump_if_Less_Than(x))
 
     elif ins[0]=="jgt":
         jj = ins[1]
 
-        if jj not in variable_dict.keys():
+        if jj not in label_dict.keys():
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
         else:
-            x = variable_dict[jj]
+            x = label_dict[jj]
             OutputFile.append(Jump_if_Greater_Than(x))
 
     elif ins[0]=="je":
         jj = ins[1]
 
-        if jj not in variable_dict.keys():
+        if jj not in label_dict.keys():
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
         else:
-            x = variable_dict[jj]
+            x = label_dict[jj]
             OutputFile.append(Jump_if_Equal(x))
 
     else:
