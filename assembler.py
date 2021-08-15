@@ -1073,6 +1073,6 @@ for instr in range(len(instructions)):
      
  
 
-for bb in OutputFile:     # print OutputFile
+for bb in OutputFile:     # for printing the Output
     print(bb)
         
