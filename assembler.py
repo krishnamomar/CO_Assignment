@@ -270,6 +270,7 @@ for instr in range(len(instructions)):
         break
 #print(instructions)
 for instr in range(len(instructions)):
+    #print(instr, len(instructions))
     if "/n" in instructions[instr]:
         instructions[instr].replace("/n", "")
     
@@ -280,6 +281,7 @@ for instr in range(len(instructions)):
     elif " :" in instructions[instr]:
         OutputFile = ["Error in line number: " + str(instr+1)]
         instructions = []
+        break
 
     elif ins[0][len(ins[0]) - 1]==":":
         d = ins[0][0:len(ins[0])-1]
@@ -287,6 +289,7 @@ for instr in range(len(instructions)):
         if d in label_dict.keys():
             OutputFile = ["Error in line number: " + str(instr+1)]
             instructions = []
+            break
         else:
             label_dict[d] = instr - variable_counter
     
