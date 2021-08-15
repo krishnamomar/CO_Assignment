@@ -255,12 +255,12 @@ for instr in range(len(instructions)):
         instructions[instr].replace("")
     ins = list((instructions[instr]).split())  #use default split
 
-    if len(ins)==0:
-        continue
-
     if ins[0][-1]==":":
         ins = ins[1:]
-    
+
+    if len(ins)==0:
+        continue
+ 
     if ins[0]=="hlt":
         if instr==len(instructions)-1:
             OutputFile.append(Halt());
@@ -1051,5 +1051,7 @@ for instr in range(len(instructions)):
         break
 # print(OutputFile)     
 # abcd 
-    
+
+for bb in OutputFile:
+    print(bb)
         
