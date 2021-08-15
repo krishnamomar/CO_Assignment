@@ -159,31 +159,39 @@ def Compare(r1, r2):
     return "01110" + "00000" + a + b
     
 
-def Unconditional_Jump(mem):
-    # mem is a string of size 8 
-    # if len(mem)!=8:
-    #     error
-    # flag(0,0,0,0)
-    return "01111" + "000" + mem
+def Unconditional_Jump(x):
+    bnr = bin(x)
+    bnr = bnr.replace('0b','')
+    while len(bnr)<8:
+        bnr = "0" + bnr
     
 
-def Jump_if_Less_Than(mem):
-    # if len(mem)!=8:
-    #     error
-    # flag(0,0,0,0)
-    return "10000" + "000" + mem
+    return "01111" + "000" + bnr
+    
 
-def Jump_if_Greater_Than(mem):
-    # if len(mem)!=8:
-    #     error
-    # flag(0,0,0,0)
-    return "10001" + "000" + mem
+def Jump_if_Less_Than(x):
+    bnr = bin(x)
+    bnr = bnr.replace('0b','')
+    while len(bnr)<8:
+        bnr = "0" + bnr
+    
+    return "10000" + "000" + bnr
 
-def Jump_if_Equal(mem):
-    # if len(mem)!=8:
-    #     error
-    # flag(0,0,0,0)
-    return "10010" + "000" + mem
+def Jump_if_Greater_Than(x):
+    bnr = bin(x)
+    bnr = bnr.replace('0b','')
+    while len(bnr)<8:
+        bnr = "0" + bnr
+    
+    return "10001" + "000" + bnr
+
+def Jump_if_Equal(x):
+    bnr = bin(x)
+    bnr = bnr.replace('0b','')
+    while len(bnr)<8:
+        bnr = "0" + bnr
+    
+    return "10010" + "000" + bnr
 
 def Halt():
     # flag(0,0,0,0)
