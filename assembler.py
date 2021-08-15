@@ -259,7 +259,7 @@ variable_counter = 0;
 
 for instr in range(len(instructions)):
     if "/n" in instructions[instr]:
-        instructions[instr].replace("")
+        instructions[instr].replace("/n", "")
 
     ins = list((instructions[instr]).split())
     if len(ins)==0:
@@ -268,11 +268,13 @@ for instr in range(len(instructions)):
         variable_counter += 1
     else:
         break
-
+#print(instructions)
 for instr in range(len(instructions)):
-    if "/n" in instructions[instr]:
-        instructions[instr].replace("")
-    
+    #print(instructions)
+    # if "\n" in instructions[instr]:
+        
+    #     instructions[instr].replace("\n", "")
+    #     print(instructions) 
     ins = list((instructions[instr]).split())
     if len(ins)==0:
         continue
@@ -284,7 +286,11 @@ for instr in range(len(instructions)):
     elif ins[0][len(ins[0]) - 1]==":":
         d = ins[0][0:len(ins[0])-1]
         
-        label_dict[d] = instr - variable_counter
+        if d in label_dict.keys():
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            instructions = []
+        else:
+            label_dict[d] = instr - variable_counter
     
     else:
         continue
@@ -299,7 +305,7 @@ for instr in range(len(instructions)):
 
 for instr in range(len(instructions)):
     if "/n" in instructions[instr]:
-        instructions[instr].replace("")
+        instructions[instr].replace("/n", "")
     ins = list((instructions[instr]).split())  #use default split
 
     
@@ -320,7 +326,7 @@ for instr in range(len(instructions)):
     
     elif ins[0]=="var":
         if len(ins)!=2:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error : variable not correctly assigned"]
             break
         
         elif len(variable_dict)==variable_counter:
@@ -328,7 +334,11 @@ for instr in range(len(instructions)):
             break
 
         elif ins[1] in label_dict.keys():
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error : Duplicate Label Found"]
+            break
+
+        elif ins[1] in variable_dict.keys():
+            OutputFile = ["Error : Duplicate Variable Found"]
             break
         
         else:
