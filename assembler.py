@@ -230,6 +230,7 @@ global OutputFile;
 global all_registers;
 global variable_dict;
 global all_resistors_1;
+global variable_counter;
 
 R0 = Register("000")
 R1 = Register("001")
@@ -244,6 +245,21 @@ all_registers = ["R0", "R1", "R2", "R3", "R4", "R5", "R6"];
 all_registers_1 = ["R0", "R1", "R2", "R3", "R4", "R5", "R6","FLAGS"];
 variable_dict = {}
 instructions = sys.stdin.readlines()
+variable_counter = 0;
+
+for instr in range(len(instructions)):
+    if "/n" in instructions[instr]:
+        instructions[instr].replace("")
+
+    ins = list((instructions[instr]).split())
+    if len(ins)==0:
+        continue
+    elif ins[0]=="var":
+        variable_counter += 1
+    else:
+        break
+
+
 
 # def flag(v,l,g,e):
 #     a="000000000000"
@@ -255,8 +271,8 @@ for instr in range(len(instructions)):
         instructions[instr].replace("")
     ins = list((instructions[instr]).split())  #use default split
 
-    if ins[0][-1]==":":
-        ins = ins[1:]
+    # if ins[0][-1]==":":
+    #     ins = ins[1:]
 
     if len(ins)==0:
         continue
@@ -273,10 +289,15 @@ for instr in range(len(instructions)):
         if len(ins)!=2:
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
+        
+        elif len(variable_dict)==variable_counter:
+            OutputFile = ["Error in line number: " + str(instr+1)]
+            break
+        
         else:
             d = ins[1]
             #if d in
-            variable_dict[d] = len(instructions) +1 + len(variable_dict)
+            variable_dict[d] = len(instructions) + len(variable_dict) - variable_counter
 
 
     elif ins[0]=="add":
@@ -492,7 +513,7 @@ for instr in range(len(instructions)):
 
             jj = ins[2]
 
-            if jj not in variable_dict.keys:
+            if jj not in variable_dict.keys():
                 OutputFile = ["Error in line number: " + str(instr+1)]
                 break
             else:
@@ -529,7 +550,7 @@ for instr in range(len(instructions)):
 
             jj = ins[2]
 
-            if jj not in variable_dict.keys:
+            if jj not in variable_dict.keys():
                 OutputFile = ["Error in line number: " + str(instr+1)]
                 break
             else:
@@ -1009,7 +1030,7 @@ for instr in range(len(instructions)):
     elif ins[0]=="jmp":
         jj = ins[1]
 
-        if jj not in variable_dict.keys:
+        if jj not in variable_dict.keys():
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
         else:
@@ -1019,7 +1040,7 @@ for instr in range(len(instructions)):
     elif ins[0]=="jlt":
         jj = ins[1]
 
-        if jj not in variable_dict.keys:
+        if jj not in variable_dict.keys():
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
         else:
@@ -1029,7 +1050,7 @@ for instr in range(len(instructions)):
     elif ins[0]=="jgt":
         jj = ins[1]
 
-        if jj not in variable_dict.keys:
+        if jj not in variable_dict.keys():
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
         else:
@@ -1039,7 +1060,7 @@ for instr in range(len(instructions)):
     elif ins[0]=="je":
         jj = ins[1]
 
-        if jj not in variable_dict.keys:
+        if jj not in variable_dict.keys():
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
         else:
