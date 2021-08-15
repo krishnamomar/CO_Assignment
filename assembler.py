@@ -239,6 +239,7 @@ global all_registers;
 global variable_dict;
 global all_resistors_1;
 global variable_counter;
+global label_dict;
 
 R0 = Register("000")
 R1 = Register("001")
@@ -252,6 +253,7 @@ OutputFile = [];
 all_registers = ["R0", "R1", "R2", "R3", "R4", "R5", "R6"];
 all_registers_1 = ["R0", "R1", "R2", "R3", "R4", "R5", "R6","FLAGS"];
 variable_dict = {}
+label_dict = {}
 instructions = sys.stdin.readlines()
 variable_counter = 0;
 
