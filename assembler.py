@@ -269,6 +269,27 @@ for instr in range(len(instructions)):
     else:
         break
 
+for instr in range(len(instructions)):
+    if "/n" in instructions[instr]:
+        instructions[instr].replace("")
+    
+    ins = list((instructions[instr]).split())
+    if len(ins)==0:
+        continue
+
+    elif " :" in instructions[instr]:
+        OutputFile = ["Error in line number: " + str(instr+1)]
+        instructions = []
+
+    elif ins[0][len(ins[0]) - 1]==":":
+        d = ins[0][0:len(ins[0])-1]
+        instructions[instr].replace(d + ":", "")
+        label_dict[d] = instr - variable_counter
+    
+    else:
+        continue
+    
+
 
 
 # def flag(v,l,g,e):
