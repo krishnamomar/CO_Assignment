@@ -283,7 +283,7 @@ for instr in range(len(instructions)):
 
     elif ins[0][len(ins[0]) - 1]==":":
         d = ins[0][0:len(ins[0])-1]
-        instructions[instr].replace(d + ":", "")
+        
         label_dict[d] = instr - variable_counter
     
     else:
@@ -302,11 +302,13 @@ for instr in range(len(instructions)):
         instructions[instr].replace("")
     ins = list((instructions[instr]).split())  #use default split
 
-    # if ins[0][-1]==":":
-    #     ins = ins[1:]
+    
 
     if len(ins)==0:
         continue
+
+    if ins[0][-1]==":":
+        ins = ins[1:]
  
     if ins[0]=="hlt":
         if instr==len(instructions)-1:
