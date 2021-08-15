@@ -1108,7 +1108,8 @@ for instr in range(len(instructions)):
         OutputFile = ["Error in line number: " + str(instr+1)]
         break
      
- 
+if "1001100000000000" not in OutputFile:
+    OutputFile = ["Error: hlt not present"]
 
 for bb in OutputFile:     # for printing the Output
     print(bb)
