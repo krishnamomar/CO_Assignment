@@ -1009,7 +1009,7 @@ for instr in range(len(instructions)):
     elif ins[0]=="jmp":
         jj = ins[1]
 
-        if jj not in variable_dict.keys:
+        if jj not in variable_dict.keys():
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
         else:
@@ -1019,7 +1019,7 @@ for instr in range(len(instructions)):
     elif ins[0]=="jlt":
         jj = ins[1]
 
-        if jj not in variable_dict.keys:
+        if jj not in variable_dict.keys():
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
         else:
@@ -1039,7 +1039,7 @@ for instr in range(len(instructions)):
     elif ins[0]=="je":
         jj = ins[1]
 
-        if jj not in variable_dict.keys:
+        if jj not in variable_dict.keys():
             OutputFile = ["Error in line number: " + str(instr+1)]
             break
         else:
