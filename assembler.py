@@ -279,7 +279,7 @@ for instr in range(len(instructions)):
         continue
 
     elif " :" in instructions[instr]:
-        OutputFile = ["Error in line number: " + str(instr+1)]
+        OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error (gap before ':')"]
         instructions = []
         break
 
@@ -287,7 +287,7 @@ for instr in range(len(instructions)):
         d = ins[0][0:len(ins[0])-1]
         
         if d in label_dict.keys():
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Illegal use of labels/variables name"]
             instructions = []
             break
         else:
@@ -322,7 +322,7 @@ for instr in range(len(instructions)):
             OutputFile.append(Halt());
             break
         else:
-            OutputFile = ["Error in line number: " + str(instr+2)]
+            OutputFile = ["Error in line number: " + str(instr+2) + "; 'hlt' not being used as the last instruction"]
             break
     
     elif ins[0]=="var":
@@ -331,7 +331,7 @@ for instr in range(len(instructions)):
             break
         
         elif len(variable_dict)==variable_counter:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Variable defined in between code"]
             break
 
         elif ins[1] in label_dict.keys():
@@ -352,7 +352,7 @@ for instr in range(len(instructions)):
         if len(ins)==4:
            
             if (ins[1] not in all_registers) or (ins[2] not in all_registers) or (ins[3] not in all_registers):
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -407,14 +407,14 @@ for instr in range(len(instructions)):
                 OutputFile.append(Addition(r1, r2, r3));
 
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error"]
             break
 
     elif ins[0]=="sub":
         if len(ins)==4:
            
             if (ins[1] not in all_registers) or (ins[2] not in all_registers) or (ins[3] not in all_registers):
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -469,14 +469,14 @@ for instr in range(len(instructions)):
                 OutputFile.append(Subtraction(r1, r2, r3));
 
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1), "; Syntax Error"]
             break
 
     elif ins[0]=="mov":
         if len(ins)==3:
            
             if (ins[1] not in all_registers):
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -499,7 +499,7 @@ for instr in range(len(instructions)):
             if (ins[2])[0]=="$":  #this is detection of imm
                 x = int(ins[2][1:])
                 if x<0 or x>255:
-                    OutputFile = ["Error in line number: " + str(instr+1)]
+                    OutputFile = ["Error in line number: " + str(instr+1) + "Illegal Immidiate Value"]
                     break
                 else:
                     OutputFile.append(Move_Immediate(r1, x))
@@ -507,7 +507,7 @@ for instr in range(len(instructions)):
                     
             
             elif (ins[2] not in all_registers_1) :
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -532,14 +532,14 @@ for instr in range(len(instructions)):
             OutputFile.append(Move_Register(r1, r2))
 
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error"]
             break
 
     elif ins[0]=="ld":
         if len(ins)==3:
            
             if (ins[1] not in all_registers):
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -562,21 +562,21 @@ for instr in range(len(instructions)):
             jj = ins[2]
 
             if jj not in variable_dict.keys():
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Variable not defined"]
                 break
             else:
                 x = variable_dict[jj]
                 OutputFile.append(Load(r1, x))
 
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax error"]
             break
     
     elif ins[0]=="st":
         if len(ins)==3:
            
             if (ins[1] not in all_registers):
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -599,21 +599,21 @@ for instr in range(len(instructions)):
             jj = ins[2]
 
             if jj not in variable_dict.keys():
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Variable not defined"]
                 break
             else:
                 x = variable_dict[jj]
                 OutputFile.append(Store(r1, x))
 
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error"]
             break
     
     elif ins[0]=="mul":
         if len(ins)==4:
            
             if (ins[1] not in all_registers) or (ins[2] not in all_registers) or (ins[3] not in all_registers):
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -668,14 +668,14 @@ for instr in range(len(instructions)):
                 OutputFile.append(Multiply(r1, r2, r3));
 
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error"]
             break
     
     elif ins[0]=="div":
         if len(ins)==3:
            
             if (ins[1] not in all_registers) or (ins[2] not in all_registers):
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -714,14 +714,14 @@ for instr in range(len(instructions)):
             OutputFile.append(Divide(r1, r2))
 
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error"]
             break
 
     elif ins[0]=="rs":
         if len(ins)==3:
            
             if (ins[1] not in all_registers):
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -744,24 +744,24 @@ for instr in range(len(instructions)):
             if (ins[2])[0]=="$":  #this is detection of imm
                 x = int(ins[2][1:])
                 if x<0 or x>255:
-                    OutputFile = ["Error in line number: " + str(instr+1)]
+                    OutputFile = ["Error in line number: " + str(instr+1) + "; Illegal Immediate values"]
                     break
                 else:
                     OutputFile.append(Right_Shift(r1, x))
                     continue
             else:
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax error"]
                 break
 
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax error"]
             break
     
     elif ins[0]=="ls":
         if len(ins)==3:
            
             if (ins[1] not in all_registers):
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -784,24 +784,24 @@ for instr in range(len(instructions)):
             if (ins[2])[0]=="$":  #this is detection of imm
                 x = int(ins[2][1:])
                 if x<0 or x>255:
-                    OutputFile = ["Error in line number: " + str(instr+1)]
+                    OutputFile = ["Error in line number: " + str(instr+1) + "; Illegal Immediate values"]
                     break
                 else:
                     OutputFile.append(Left_Shift(r1, x))
                     continue
             else:
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax error"]
                 break
 
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax error"]
             break
     
     elif ins[0]=="xor":
         if len(ins)==4:
            
             if (ins[1] not in all_registers) or (ins[2] not in all_registers) or (ins[3] not in all_registers):
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -856,14 +856,14 @@ for instr in range(len(instructions)):
                 OutputFile.append(XOR(r1, r2, r3));
 
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax error"]
             break
 
     elif ins[0]=="or":
         if len(ins)==4:
            
             if (ins[1] not in all_registers) or (ins[2] not in all_registers) or (ins[3] not in all_registers):
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -918,14 +918,14 @@ for instr in range(len(instructions)):
                 OutputFile.append(OR(r1, r2, r3));
 
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax error"]
             break
 
     elif ins[0]=="and":
         if len(ins)==4:
            
             if (ins[1] not in all_registers) or (ins[2] not in all_registers) or (ins[3] not in all_registers):
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -980,14 +980,14 @@ for instr in range(len(instructions)):
                 OutputFile.append(AND(r1, r2, r3));
 
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax error"]
             break
 
     elif ins[0]=="not":
         if len(ins)==3:
            
             if (ins[1] not in all_registers) or (ins[2] not in all_registers):
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -1026,14 +1026,14 @@ for instr in range(len(instructions)):
             OutputFile.append(Invert(r1, r2))
 
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax error"]
             break
 
     elif ins[0]=="cmp":
         if len(ins)==3:
            
             if (ins[1] not in all_registers) or (ins[2] not in all_registers):
-                OutputFile = ["Error in line number: " + str(instr+1)]
+                OutputFile = ["Error in line number: " + str(instr+1) + "; Syntax Error, Valid Register not found"]
                 break
 
             else:
@@ -1072,14 +1072,14 @@ for instr in range(len(instructions)):
             OutputFile.append(Compare(r1, r2))
 
         else:
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "Syntax error"]
             break
 
     elif ins[0]=="jmp":
         jj = ins[1]
 
         if jj not in label_dict.keys():
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Use of Undefined Labels"]
             break
         else:
             x = label_dict[jj]
@@ -1089,7 +1089,7 @@ for instr in range(len(instructions)):
         jj = ins[1]
 
         if jj not in label_dict.keys():
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Use of Undefined Labels"]
             break
         else:
             x = label_dict[jj]
@@ -1099,7 +1099,7 @@ for instr in range(len(instructions)):
         jj = ins[1]
 
         if jj not in label_dict.keys():
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Use of Undefined Labels"]
             break
         else:
             x = label_dict[jj]
@@ -1109,14 +1109,14 @@ for instr in range(len(instructions)):
         jj = ins[1]
 
         if jj not in label_dict.keys():
-            OutputFile = ["Error in line number: " + str(instr+1)]
+            OutputFile = ["Error in line number: " + str(instr+1) + "; Use of Undefined Labels"]
             break
         else:
             x = label_dict[jj]
             OutputFile.append(Jump_if_Equal(x))
 
     else:
-        OutputFile = ["Error in line number: " + str(instr+1)]
+        OutputFile = ["Error in line number: " + str(instr+1) + "; Undefined Instruction"]
         break
      
 if len(OutputFile)==1:
@@ -1130,6 +1130,7 @@ if len(OutputFile)==1:
 
 elif "1001100000000000" not in OutputFile:
      OutputFile = ["Error: hlt not present"]
+     print("Error: hlt not present")
 
 else:
     for bb in OutputFile:     # for printing the Output
