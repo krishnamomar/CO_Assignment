@@ -986,7 +986,7 @@ for i in range(remain_lines):
 x_points = np.array(plot_points_x)
 y_points = np.array(plot_points_y)
 
-plt.plot(x_points, y_points)
+plt.scatter(x_points, y_points)
 
 plt.xlabel("Cycle Number")
 plt.ylabel("Memory Address")
