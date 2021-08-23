@@ -255,7 +255,7 @@ while (not halted):
     cycle_no += 1
     instr = instructions[prg_count]
     if (instr=="1001100000000000"):
-        #FLAGS.reset();
+        FLAGS.reset();
         crnt_prnt = printer(prg_count)
         print(*crnt_prnt)
         #FLAGS.reset()
